@@ -41,7 +41,7 @@
                     {% for field in user_form %}
                         <div class="row">
                         <div class="col-md-4">
-                            <span style="color: black">{{ field.label }} </span>
+                            <span style="color: black">{{ field.label_tag }} </span>
                             {% if field.help_text %}
                                 <small class="form-text text-muted">{{ field.help_text|safe }}</small>
                             {% endif %}
@@ -65,7 +65,8 @@
                         </div><div class="col-md-8 pull-left">
                          {% if field.label == 'More about you'%} 
                             <textarea id="description" name="description" class="form-control" rows="3" 
-                                        value={{ form.description.value}} > </textarea>         
+                                        value={{ form.description.value}} > </textarea>
+         
                         {% else %}
 						    <p><input name="{{field.name}}" type="{{field.name}}" class="form-control myfont" placeholder="{{field.label}}"> </p>
                          {% endif %}
@@ -77,7 +78,7 @@
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="strong" href="{% url 'home' %}">Back</a>
+                    <a class="strong" href="{% url 'profile' %}">Back</a>
                   </div>
                 </div>
               </div>

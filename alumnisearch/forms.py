@@ -47,7 +47,7 @@ class ProfileForm(forms.ModelForm):
     gender = AlumnusProfile.GENDER_CHOICES
     DATE_INPUT_FORMATS = ('%d/%m/%Y','%Y/%m/%d')
 
-    dob = forms.DateField(input_formats=DATE_INPUT_FORMATS, required=False)
+    dob = forms.DateField(input_formats=DATE_INPUT_FORMATS, required=False, label="Dob\t(This should be in the format dd/mm/yy or yy/mm/dd)")
     website_url = forms.CharField(max_length=50, required=False, label="Your linkedin url or website ")
     description = forms.CharField(max_length=500, label="More about you", required=False)
     gender = forms.ChoiceField(label='Gender', choices=gender , required=False)
@@ -65,7 +65,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('profile_name', 'full_name', 'email', 'school', 'batch_year', 'city', 'country')
+        fields = ('profile_name', 'full_name', 'email', 'school', 'batch_year', 'city')
     
 
 class ChangePasswordForm(forms.Form):

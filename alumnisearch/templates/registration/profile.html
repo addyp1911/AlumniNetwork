@@ -26,17 +26,17 @@
           <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5">
             <div class="card-body">
                 <h2>{{user.full_name}}</h2>
-                <p><strong>Account Name: </strong> {{user.profile_name}} </p>
+                <p><strong>Profile Name: </strong> {{user.profile_name}} </p>
                 <p><strong>Email: </strong> {{user.email}} </p>
                 <p><strong>Mobile: </strong> {{user.profile.mobile}} </p>
                 <p><strong>DOB: </strong> {{user.profile.dob}} </p>
                 <p><strong>Gender: </strong> {{user.profile.gender}} </p>
                 <p><strong>School: </strong> {{user.school}} </p>
                 <p><strong>Batch Year: </strong> {{user.batch_year}} </p>
-                <p><strong>City: </strong> {{user.city}} </p>
-                <p><strong>State: </strong> {{user.profile.state}} </p>
+                <p><strong>City of your school: </strong> {{user.city}} </p>
+                <p><strong>Your current address: </strong> {{user.profile.address}} </p>
                 <p><strong>Country: </strong> {{user.country}} </p>
-                <p><strong>Bio: </strong> {{user.profile.description}} </p>
+                <p><strong>More about you: </strong> {{user.profile.description}} </p>
                 <p><strong>Website Url: </strong> {{user.profile.website_url}} </p>
                 
                 <a href="{% url 'profile-update' %}" class="btn btn-sm btn-primary shadow-sm">Update Profile</a>
