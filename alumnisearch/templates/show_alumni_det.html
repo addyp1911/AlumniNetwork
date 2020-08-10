@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+    {% for message in messages %}
+        <div class="alert alert-info alert-dismissible" id="error_msg" style="color: black;"{{ message.tags }} role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+        </div>
+        <script>
+        setTimeout(function(){
+        if ($('#error_msg').length > 0) {
+            $('#error_msg').remove();
+        }
+        }, 2000)
+    </script>
+    {% endfor %}
+        
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800"> <b> Know more about {{profile.full_name}} ! </b></h1>
+        </div>   
+        {% for message in messages %}
+            <div class="alert alert-info alert-dismissible" style="color: black;"{{ message.tags }} role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}       
+        <!-- Main Content Here -->
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-3 my-5">
+            <img src={% static 'img/default-avatar.png'%} class="rounded float-right" height="300px" width="300px">
+          </div>
+          <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5">
+            <div class="card-body">
+                <h2>{{profile.full_name}}</h2>
+                <p><strong>Contact Details: </strong> {{profile.email}} {{profile.mobile}}</p>
+                <p><strong>Wish him birthday on: </strong> {{profile.dob}} {% if profile.dob %} {% else %} No details given. {% endif %}  </p>
+                <p><strong>School: </strong> {{profile.school}} </p>
+                <p><strong>Batch Year: </strong> {{profile.batch_year}} </p>
+                <p><strong>City of your school: </strong> {{profile.city}} {{profile.state}} {{profile.country}}</p>
+                <p><strong>Country: </strong> {{profile.country}}{% if profile.country %} {% else %} No details given. {% endif %} </p>
+                <p><strong>Find him at: </strong> {{profile.website_url}} {% if profile.website_url %} {% else %} No details given. {% endif %} </p>
+                <p><strong>More about him: </strong> {{profile.description}} {% if profile.description %} {% else %} No details given. {% endif %}</p>
+                <div class="row justify-content-center">
+                    <a class="strong" href="{% url 'home' %}">Back</a>
+            </div>
+            </div>
+          </div>
+        </div>
+            
+
+
+        
+    </div>
+    <!-- /.container-fluid -->
+{% endblock content %}

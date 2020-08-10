@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br> </br>
+    <div class="row mb-6">
+     <div class="col-lg-8 mx-auto">
+      <h5 class="font-weight-light mb-4 font-italic text-black" style="white-space: nowrap;" > Please fill in your contact details and other information by updating your profile for your batch mates to see !</h5>
+      <div class="bg-white p-5 rounded shadow">
+      
+        <h5 class="font-weight-light mb-4 font-italic text-black" style="white-space: nowrap;" > <b> Hello {{request.user.full_name}}, search your alumni network! </b></h5>
+        <!-- Underlined search bars with buttons -->
+        <form action="{% url 'alumni-list' %}" method="GET">
+          <div class="row mb-4">
+            <div class="form-group col-md-9">
+              <input id="exampleFormControlInput5" type="search" name="name" placeholder="what is your batch mate's name?" class="form-control form-control-underlined">
+            </div>
+            <div class="form-group col-md-9">
+              <input id="exampleFormControlInput5" type="search" name="batch_year" placeholder="what is your batch year?" class="form-control form-control-underlined">
+            </div>
+          </div>
+          <div class="mx-auto text-center col-md-6">
+              <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm ">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    <!-- /.container-fluid -->
+{% endblock content %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% block content %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800">Profile Update</h1>
+        </div>          
+
+        <!-- Main Content Here -->
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <div class="row">
+              <div class="col-lg-3"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Update Your Profile!</h1>
+                  </div>
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for message in messages %}
+                        <div class="alert alert-info alert-dismissible" id="error_msg" style="color: black;"{{ message.tags }} role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                        <script>
+                        setTimeout(function(){
+                        if ($('#error_msg').length > 0) {
+                            $('#error_msg').remove();
+                        }
+                        }, 2000)
+                    </script>
+                    {% endfor %}
+                    {% for field in user_form %}
+                        <div class="row">
+                        <div class="col-md-4">
+                            <span style="color: black">{{ field.label }} </span>
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+                            {% endif %}
+                        </div>
+                        {% if field.name == "profile_image" %}
+                            <p> <img src={% static 'default-avatar.png'%} height="100px" width="100px"> </p>
+                        {% else %}   
+                            <div class="col-md-8 pull-left">
+                                <p><input name="{{field.name}}" type="{{field.name}}" class="form-control myfont" placeholder="{{field.label}}"> </p>
+                            </div>
+                        {% endif %}    
+                        </div>  
+                    {% endfor %}
+                    {% for field in profile_form %}
+                        <div class="row">
+                        <div class="col-md-4">
+                            <span style="color: black">{{ field.label_tag }} </span>
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+                            {% endif %}
+                        </div><div class="col-md-8 pull-left">
+                         {% if field.label == 'More about you'%} 
+                            <textarea id="description" name="description" class="form-control" rows="3" 
+                                        value={{ form.description.value}} > </textarea>         
+                        {% else %}
+						    <p><input name="{{field.name}}" type="{{field.name}}" class="form-control myfont" placeholder="{{field.label}}"> </p>
+                         {% endif %}
+                        </div>
+                        </div>
+                        <p> </p>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-success btn-block">Update</button>
+                  </form>
+                  <hr>
+                  <div class="text-center">
+                    <a class="strong" href="{% url 'home' %}">Back</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+    </div>
+    <!-- /.container-fluid -->
+{% endblock content %}

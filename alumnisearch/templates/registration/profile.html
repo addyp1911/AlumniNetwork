@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800">Profile</h1>
+        </div>   
+        {% for message in messages %}
+            <div class="alert alert-info alert-dismissible" style="color: black;"{{ message.tags }} role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}       
+        <!-- Main Content Here -->
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-3 my-5">
+            <img src={% static 'img/default-avatar.png'%} class="rounded float-right" height="300px" width="300px">
+          </div>
+          <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5">
+            <div class="card-body">
+                <h2>{{user.full_name}}</h2>
+                <p><strong>Account Name: </strong> {{user.profile_name}} </p>
+                <p><strong>Email: </strong> {{user.email}} </p>
+                <p><strong>Mobile: </strong> {{user.profile.mobile}} </p>
+                <p><strong>DOB: </strong> {{user.profile.dob}} </p>
+                <p><strong>Gender: </strong> {{user.profile.gender}} </p>
+                <p><strong>School: </strong> {{user.school}} </p>
+                <p><strong>Batch Year: </strong> {{user.batch_year}} </p>
+                <p><strong>City: </strong> {{user.city}} </p>
+                <p><strong>State: </strong> {{user.profile.state}} </p>
+                <p><strong>Country: </strong> {{user.country}} </p>
+                <p><strong>Bio: </strong> {{user.profile.description}} </p>
+                <p><strong>Website Url: </strong> {{user.profile.website_url}} </p>
+                
+                <a href="{% url 'profile-update' %}" class="btn btn-sm btn-primary shadow-sm">Update Profile</a>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+    </div>
+    <!-- /.container-fluid -->
+{% endblock content %}

@@ -1,0 +1,53 @@
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-image: url('../img/login_bg.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+
+.container{
+height: 100%;
+align-content: center;
+}
+
+.card{
+height: 640px;
+margin-top: auto;
+margin-bottom: auto;
+width: 500px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+
+.register_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
+}
+
+.register_btn:hover{
+color: black;
+background-color: white;
+}
+
+.alert{
+  /* margin-bottom: 1px; */
+  height: 30px;
+  padding:0px 15px;
+  align-content: left;
+  white-space:nowrap
+}
+
+#message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#inner-message {
+  margin: 0 auto;
+}
