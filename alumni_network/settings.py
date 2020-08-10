@@ -11,21 +11,25 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv, find_dotenv
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ENV_FILE = "my_env.env"
 
+load_dotenv(os.path.join(BASE_DIR, ENV_FILE))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9)1%*$n%yazt6qyh*i5*t-_y4jge7*9x+wv_r$cs*!yj+v+$3t'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,11 +46,11 @@ INSTALLED_APPS = [
 
 
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = "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"
+SENDGRID_API_KEY = os.getenv("SEND_GRID_KEY")
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False 
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'mail_key'
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
