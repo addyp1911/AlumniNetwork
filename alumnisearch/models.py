@@ -74,3 +74,9 @@ class AlumnusProfile(BaseModel):
 
         """Return string representation of alumnusprofile object"""
         return str(self.uuid) + str(self.alumnus.full_name)
+
+
+class User_Post(models.Model):
+    alumnus = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, related_name='post')
+    post = models.CharField(max_length=100, null=True, blank=True)
+

@@ -65,7 +65,7 @@ class UserSignIn(View):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"You are now logged in as {user.full_name}")
+                messages.success(request, f"You are now logged in as {user.full_name}")
             else:
                 messages.error(request, "Invalid email or password.")
         else:
@@ -163,7 +163,7 @@ class ForgotPassword(View):
                 msg_html = render_to_string('registration/password_mail.html', context)
                 status = send_email(subject, body, FROM, recipient, msg_html)
                 if status:
-                    messages.info(request, "Your new password has been sent to your email id!")
+                    messages.success(request, "Your new password has been sent to your email id!")
                     user.password = make_password(new_password)
                     user.save()
                 else:
@@ -174,6 +174,7 @@ class ForgotPassword(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, template_name = "registration/forgot_password.html")
+
 
 class ListAlumni(LoginRequiredMixin, View):
     """API View for listing all the alumni on the basis of name/batch year as typed by the logged in user."""
@@ -223,3 +224,33 @@ class ProfileRetrieve(LoginRequiredMixin, View):
             messages.error(request, GENERIC_ERR)
         return render(request, 'show_alumni_det.html', context={"profile":user_data})
 
+
+class PostNote(View):
+    """API View to post a note that can be viewed only by batch mates."""
+
+    def post(self, request, *args, **kwargs):
+        try:
+            posts_dict = {}
+            request_data = request.POST.dict()
+            with transaction.atomic():
+                if request_data.get("post"):
+                    post_for_batch = User_Post.objects.create(alumnus=request.user, post=request_data.get("post"))
+                    post_for_batch.save()
+                    posts_dict = User_Post.objects.filter(id=post_for_batch.id) 
+                    messages.success(request, "Your note has been saved successfully")
+        except Exception:
+            messages.error(request, GENERIC_ERR)
+        return render(request, 'show_notes.html', {'posts': posts_dict})
+
+    def get_queryset(self, request):
+        return User_Post.objects.filter(alumnus__school__iexact=request.user.school, \
+            alumnus__batch_year__iexact=request.user.batch_year)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            posts_det = self.get_queryset(request)
+            return render(request, 'show_notes.html', {'posts': posts_det})      
+        except Exception as e:
+            messages.info(request, GENERIC_ERR)
+        return render(request, 'home.html')
+        

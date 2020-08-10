@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% block content %}
+    <br> </br>
+    <div class="row mb-6">
+     <div class="col-lg-8 mx-auto">
+      <div class="bg-white p-5 rounded shadow">
+      
+        <h5 class="font-weight-light mb-4 font-italic text-black" style="white-space: nowrap;" > <b> Hello {{request.user.full_name}}, post a note ! </b></h5>
+        <!-- Underlined search bars with buttons -->
+        <form action="{% url 'post-action' %}" method="POST">
+        {% csrf_token %}
+        {% for message in messages %}
+            <div class="alert alert-info alert-dismissible" id="error_msg" style="color: black;"{{ message.tags }} role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        <script>
+            setTimeout(function(){
+            if ($('#error_msg').length > 0) {
+                $('#error_msg').remove();
+            }
+            }, 2000)
+        </script>
+        <div class="row mb-4">
+            <div class="form-group purple-border col-md-9">
+                <textarea class="form-control text-center" id="exampleFormControlTextarea4"  placeholder="Type in a post for your batch mates to see...." name="post" rows="3"></textarea>
+            </div>
+        </div>
+          <div class="mx-auto text-center col-md-4">
+              <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm ">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    <!-- /.container-fluid -->
+{% endblock content %}

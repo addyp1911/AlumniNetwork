@@ -3,6 +3,8 @@ from . import views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
+from django.views.generic import TemplateView
+
 
 r_uuid = r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 
@@ -16,6 +18,9 @@ urlpatterns = [
     path('change-password/', views.ChangePassword.as_view(), name='change-password'),
     path('forgot-password/', views.ForgotPassword.as_view(), name='forgot-password'),
     path('alumni-list/', views.ListAlumni.as_view(), name='alumni-list'),
-    url(r'^profile-show/(?P<id>%s)$' % r_uuid ,views.ProfileRetrieve.as_view(), name='profile-show')
+    url(r'^profile-show/(?P<id>%s)$' % r_uuid ,views.ProfileRetrieve.as_view(), name='profile-show'),
+    path('note-view/', TemplateView.as_view(template_name='post-note.html'), name='note-view'),
+    path('post-action/',  views.PostNote.as_view(), name='post-action'),
+
 
 ]

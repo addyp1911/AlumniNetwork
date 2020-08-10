@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        {% for message in messages %}
+            <div class="alert alert-info alert-dismissible" id="error_msg" style="color: black;"{{ message.tags }} role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        <script>
+            setTimeout(function(){
+            if ($('#error_msg').length > 0) {
+                $('#error_msg').remove();
+            }
+            }, 2000)
+        </script>
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800">Group Posts</h1>
+        </div>   
+        {% for message in messages %}
+            <div class="alert alert-info alert-dismissible" style="color: black;"{{ message.tags }} role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}       
+        <!-- Main Content Here -->
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5">
+            <div class="card-body">
+                {% for post_data in posts %}
+                    <p> {{ post_data.post}} by <b> {{post_data.alumnus.full_name}}</b> </p> 
+                {%endfor%}
+                <div class="text-center">
+                    <a class="strong" href="{% url 'home' %}">Back</a>
+                  </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+    </div>
+    <!-- /.container-fluid -->
+{% endblock content %}
