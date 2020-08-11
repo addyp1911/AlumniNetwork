@@ -4,25 +4,25 @@
 {% block content %}
     <!-- Begin Page Content -->
     <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800">Group Posts</h1>
+        </div>   
         {% for message in messages %}
-            <div class="alert alert-info alert-dismissible" id="error_msg" style="color: black;"{{ message.tags }} role="alert">
+            <div class="alert alert-info alert-dismissible" style="color: black;"{{ message.tags }} role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
                 {{ message }}
             </div>
-        {%endfor%}
-    <script>
+        <script>
         setTimeout(function(){
         if ($('#error_msg').length > 0) {
             $('#error_msg').remove();
         }
         }, 2000)
     </script>
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-        <h1 class="h3 mb-0 text-gray-800">Group Posts</h1>
-        </div>       
+        {% endfor %}       
         <!-- Main Content Here -->
         <div class="row">
           <div class="col-lg-2"></div>
