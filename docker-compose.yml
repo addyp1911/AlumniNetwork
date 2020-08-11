@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+    web:
+        image: alumni-network
+        command: python manage.py runserver 0.0.0.0:8000
+        build: .
+        volumes: 
+        - .:/alumni-network
+        ports:
+        - 8000:8000
+
+    
+   
+           
