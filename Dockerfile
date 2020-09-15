@@ -9,7 +9,7 @@ RUN pip install psycopg2-binary
 
 RUN mkdir /docker_project
 WORKDIR /docker_project
-RUN mkdir media static logs
+RUN mkdir logs
 
 # Copy application source code to SRCDIR
 COPY . .
@@ -19,4 +19,3 @@ RUN pip install -r requirements.txt
 
 # Port to expose 
 EXPOSE 8000
-CMD python manage.py runserver 0.0.0.0:8000
