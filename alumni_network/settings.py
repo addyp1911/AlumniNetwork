@@ -150,4 +150,4 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'alumnisearch.User'  # custom AUTH_USER_MODEL
 LOGOUT_URL = 'home/'
 
-STATIC_ROOT = BASE_DIR + '/staticfiles/'
+STATIC_ROOT = BASE_DIR + '/static/'
