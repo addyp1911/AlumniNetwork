@@ -5,8 +5,6 @@ services:
         image: alumni-network
         command: python manage.py runserver 0.0.0.0:8000
         build: .
-        volumes: 
-        - .:/my-volumes
         ports:
         - 8000:8000
 
